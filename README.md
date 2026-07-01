@@ -1,4 +1,4 @@
-# 📨 PUP — Automated Internship Application
+# 📨 PUP—Automated Internship Application
 
 A small toolkit for **PUP** students applying for internships / OJT.
 
