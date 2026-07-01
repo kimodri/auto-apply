@@ -7,7 +7,10 @@ function sendOjtApplications() {
   
   let sentCount = 0;
 
-  const resumeId = "";  // Replace with your actual resume file ID from Google Drive 
+  // TODO: paste your resume's Google Drive file ID here (the FILE_ID in
+  // https://drive.google.com/file/d/FILE_ID/view). Leaving this empty makes
+  // DriveApp.getFileById() throw, so set it before running.
+  const resumeId = "";
   const resume = DriveApp.getFileById(resumeId);
   
   for (let i = 1; i < data.length; i++) {
@@ -21,12 +24,22 @@ function sendOjtApplications() {
     // Only send if there is an email and is_sent is 0 (or empty)
     if (emailAddress && (isSent === 0 || isSent === "" || isSent === false)) {
       
-      // The template with dynamic variables injected
-      const messageBody = `Dear ${contactPerson || "Hiring Manager"}
-            Your message here`,;
+      // The template with dynamic variables injected.
+      // TODO: replace the body below with your own application message.
+      const messageBody = `Dear ${contactPerson || "Hiring Manager"},
 
-      // Define a professional subject line
-      const subject = `Internship Application - IT/Data Role - Kim Audrey Magan`;
+I am a student from the Polytechnic University of the Philippines writing to
+apply for an internship / OJT opportunity at ${companyName || "your company"}.
+Please find my resume attached for your review.
+
+Thank you for your time and consideration.
+
+Best regards,
+Your Name`;
+
+      // Define a professional subject line.
+      // TODO: put your name and target role here.
+      const subject = Internship Application - IT/Data Role - Your Name;
       
       try {
         // Send the email and ensure the resume is attached
@@ -42,7 +55,7 @@ function sendOjtApplications() {
         sentCount++;
         
       } catch (error) {
-        Logger.log(`Failed to send to ${emailAddress} on row ${i + 1}: ${error.toString()}`);
+        Logger.log(Failed to send to ${emailAddress} on row ${i + 1}: ${error.toString()});
       }
     }
   }
@@ -50,7 +63,7 @@ function sendOjtApplications() {
   // Show a popup when finished
   const ui = SpreadsheetApp.getUi();
   if (sentCount > 0) {
-    ui.alert("Success", `Successfully sent ${sentCount} application(s)!`, ui.ButtonSet.OK);
+    ui.alert("Success", Successfully sent ${sentCount} application(s)!, ui.ButtonSet.OK);
   } else {
     ui.alert("Done", "No pending rows found (all are already marked as 1).", ui.ButtonSet.OK);
   }
