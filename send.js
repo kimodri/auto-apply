@@ -34,12 +34,11 @@ Please find my resume attached for your review.
 
 Thank you for your time and consideration.
 
-Best regards,
-Your Name`;
+Best regards,`;
 
       // Define a professional subject line.
       // TODO: put your name and target role here.
-      const subject = Internship Application - IT/Data Role - Your Name;
+      const subject = `Internship Application - IT/Data Role - ${contactPerson || "Your Name"}`;
       
       try {
         // Send the email and ensure the resume is attached
@@ -55,7 +54,7 @@ Your Name`;
         sentCount++;
         
       } catch (error) {
-        Logger.log(Failed to send to ${emailAddress} on row ${i + 1}: ${error.toString()});
+        Logger.log(`Failed to send to ${emailAddress} on row ${i + 1}: ${error.toString()}`);
       }
     }
   }
@@ -63,7 +62,7 @@ Your Name`;
   // Show a popup when finished
   const ui = SpreadsheetApp.getUi();
   if (sentCount > 0) {
-    ui.alert("Success", Successfully sent ${sentCount} application(s)!, ui.ButtonSet.OK);
+    ui.alert("Success", `Successfully sent ${sentCount} application(s)!`, ui.ButtonSet.OK);
   } else {
     ui.alert("Done", "No pending rows found (all are already marked as 1).", ui.ButtonSet.OK);
   }
